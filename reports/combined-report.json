@@ -1,0 +1,259 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-04-10T23:10:13.908Z",
+    "end": "2024-04-10T23:10:48.152Z",
+    "duration": 34244,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "88592d3e-50ed-4e63-af9a-35f5cbd64468",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d8778fa9-d939-4775-a736-2f26cce88e5b",
+          "title": "Inicio de sesión en GitHub",
+          "fullFile": "C:\\Users\\Pedro\\Documents\\Selenium\\InicioSesion.js",
+          "file": "\\InicioSesion.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Debería iniciar sesión con éxito",
+              "fullTitle": "Inicio de sesión en GitHub Debería iniciar sesión con éxito",
+              "timedOut": false,
+              "duration": 3723,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(\"chrome\").build();\nlet folderName = \"1\";\ntry {\n  if (!fs.existsSync(folderName)) {\n    fs.mkdirSync(folderName);\n  }\n  await driver.get(\n    \"https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub\"\n  );\n  await takeScreenshot(driver, folderName, \"1_login_page.png\");\n  await driver.wait(until.elementLocated(By.id(\"login_field\")), 5000);\n  await driver\n    .findElement(By.id(\"login_field\"))\n    .sendKeys(\"goumanpenguinNgrok01\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"2_username_entered.png\");\n  await driver.wait(until.elementLocated(By.id(\"password\")), 5000);\n  await driver\n    .findElement(By.id(\"password\"))\n    .sendKeys(\"Pantonio2404#\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"3_password_entered.png\");\n  console.log(\"Prueba exitosa.\");\n} catch (error) {\n  console.error(\"Error en la prueba:\", error);\n  await takeScreenshot(driver, folderName, \"error_screenshot.png\");\n} finally {\n  generateReport();\n}",
+              "err": {},
+              "uuid": "944a2356-11ce-45c4-aeba-e0ae237556bf",
+              "parentUUID": "d8778fa9-d939-4775-a736-2f26cce88e5b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "944a2356-11ce-45c4-aeba-e0ae237556bf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3723,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 50000
+        },
+        {
+          "uuid": "39e764d4-76ba-4391-a383-cf1539e49254",
+          "title": "Creación de repositorio en GitHub",
+          "fullFile": "C:\\Users\\Pedro\\Documents\\Selenium\\CrearRepositorio.js",
+          "file": "\\CrearRepositorio.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Creación de un repositorio con éxito",
+              "fullTitle": "Creación de repositorio en GitHub Creación de un repositorio con éxito",
+              "timedOut": false,
+              "duration": 6934,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(\"chrome\").build();\nlet folderName = \"2\";\ntry {\n  if (!fs.existsSync(folderName)) {\n    fs.mkdirSync(folderName);\n  }\n  await driver.get(\n    \"https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub\"\n  );\n  await takeScreenshot(driver, folderName, \"1_login_page.png\"); // Captura de pantalla de la página de inicio de sesión de GitHub\n  await driver.wait(until.elementLocated(By.id(\"login_field\")), 5000); // Esperar hasta que se cargue el campo de nombre de usuario\n  await driver\n    .findElement(By.id(\"login_field\"))\n    .sendKeys(\"goumanpenguinNgrok01\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"2_username_entered.png\"); // Captura de pantalla después de introducir el nombre de usuario\n  await driver.wait(until.elementLocated(By.id(\"password\")), 5000); // Esperar hasta que se cargue el campo de contraseña\n  await driver\n    .findElement(By.id(\"password\"))\n    .sendKeys(\"Pantonio2404#\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"3_password_entered.png\"); // Captura de pantalla después de introducir la contraseña\n  console.log(\"Primera parte exitosa.\");\n  await driver\n    .findElement(By.css('[aria-label=\"Open global navigation menu\"]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"5_menu_button_clicked.png\");\n  await driver.findElement(By.className(\"ActionListItem-label\")).click();\n  await takeScreenshot(driver, folderName, \"6_home_link_clicked.png\");\n  let repoNameInput = await driver.wait(\n    until.elementLocated(\n      By.css('input[placeholder=\"name your new repository...\"]')\n    ),\n    5000\n  );\n  await repoNameInput.sendKeys(\"repo1\");\n  await takeScreenshot(driver, folderName, \"7_repository_name_entered.png\");\n  let publicVisibilityRadio = await driver.wait(\n    until.elementLocated(\n      By.css('input[name=\"repository[visibility]\"][value=\"public\"]')\n    ),\n    5000\n  );\n  await publicVisibilityRadio.click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"8_public_visibility_selected.png\"\n  );\n  let createButton = await driver.wait(\n    until.elementLocated(\n      By.xpath('//span[contains(text(), \"Create a new repository\")]')\n    ),\n    5000\n  );\n  await createButton.click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"9_after_create_button_click.png\"\n  );\n  \n\n} catch (error) {\n  console.error(\"Error al crear el repositorio:\", error);\n  await takeScreenshot(driver, folderName, \"error_screenshot.png\");\n} finally {\n  await driver.quit();\n  generateReport();\n}",
+              "err": {},
+              "uuid": "5bb92d0f-0fec-4bcc-b103-5053de75d9ed",
+              "parentUUID": "39e764d4-76ba-4391-a383-cf1539e49254",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5bb92d0f-0fec-4bcc-b103-5053de75d9ed"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6934,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 50000
+        },
+        {
+          "uuid": "6b51dbe2-8fb8-4595-a25e-9280db085128",
+          "title": "Cambio de visibilidad de repositorio en GitHub a Privado",
+          "fullFile": "C:\\Users\\Pedro\\Documents\\Selenium\\ChangeVisibilityToPrivate.js",
+          "file": "\\ChangeVisibilityToPrivate.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cambio de visibilidad de repositorio de un repositorio con éxito",
+              "fullTitle": "Cambio de visibilidad de repositorio en GitHub a Privado Cambio de visibilidad de repositorio de un repositorio con éxito",
+              "timedOut": false,
+              "duration": 7975,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(\"chrome\").build();\nlet folderName = \"3\";\ntry {\n  if (!fs.existsSync(folderName)) {\n    fs.mkdirSync(folderName);\n  }\n  await driver.get(\n    \"https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub\"\n  );\n  await takeScreenshot(driver, folderName, \"1_login_page.png\"); // Captura de pantalla de la página de inicio de sesión de GitHub\n  await driver.wait(until.elementLocated(By.id(\"login_field\")), 5000); // Esperar hasta que se cargue el campo de nombre de usuario\n  await driver\n    .findElement(By.id(\"login_field\"))\n    .sendKeys(\"goumanpenguinNgrok01\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"2_username_entered.png\"); // Captura de pantalla después de introducir el nombre de usuario\n  await driver.wait(until.elementLocated(By.id(\"password\")), 5000); // Esperar hasta que se cargue el campo de contraseña\n  await driver\n    .findElement(By.id(\"password\"))\n    .sendKeys(\"Pantonio2404#\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"3_password_entered.png\"); // Captura de pantalla después de introducir la contraseña\n  console.log(\"Primera parte exitosa.\");\n  let avatarImage = await driver.wait(\n    until.elementLocated(By.css(\"img.avatar.circle\")),\n    5000\n  );\n  await avatarImage.click();\n  await takeScreenshot(driver, folderName, \"avatar_image_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    ),\n    5000\n  );\n  await driver\n    .findElement(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    )\n    .click();\n  await takeScreenshot(driver, folderName, \"your_repositories_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.xpath('//a[contains(text(), \"repo1\")]')),\n    10000\n  );\n  await driver\n    .findElement(By.xpath('//a[contains(text(), \"repo1\")]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"repo1_clicked.png\");\n  await driver.wait(until.elementLocated(By.id(\"settings-tab\")), 20000);\n  await driver.findElement(By.id(\"settings-tab\")).click();\n  await takeScreenshot(driver, folderName, \"settings_tab_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath('//span[contains(text(), \"Change visibility\")]')\n    ),\n    15000\n  );\n  await driver\n    .findElement(By.xpath('//span[contains(text(), \"Change visibility\")]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"change_visibility_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.className(\"ActionList-item-label\")),\n    15000\n  );\n  await driver.findElement(By.className(\"ActionList-item-label\")).click();\n  await takeScreenshot(driver, folderName, \"change_to_private_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-private\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-private\"))\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"want_to_make_private_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-private\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-private\"))\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"read_and_understand_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-private\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-private\"))\n    .click();\n  await takeScreenshot(driver, folderName, \"make_private_clicked.png\");\n  console.log(\"Visibilidad Cambiada exitosamente.\");\n} catch (error) {\n  console.error(\"Error al crear el repositorio:\", error);\n  await takeScreenshot(driver, folderName, \"error_screenshot.png\");\n} finally {\n  generateReport();\n  await driver.quit();\n}",
+              "err": {},
+              "uuid": "217c09b9-11e6-490e-8232-7ae2037924b4",
+              "parentUUID": "6b51dbe2-8fb8-4595-a25e-9280db085128",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "217c09b9-11e6-490e-8232-7ae2037924b4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7975,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 50000
+        },
+        {
+          "uuid": "2939ac75-9aad-470e-92bf-d2654389d442",
+          "title": "Cambio de visibilidad de repositorio en GitHub a Publico",
+          "fullFile": "C:\\Users\\Pedro\\Documents\\Selenium\\ChangeVisibilityToPublic.js",
+          "file": "\\ChangeVisibilityToPublic.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cambio de visibilidad de repositorio de un repositorio con éxito",
+              "fullTitle": "Cambio de visibilidad de repositorio en GitHub a Publico Cambio de visibilidad de repositorio de un repositorio con éxito",
+              "timedOut": false,
+              "duration": 7992,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(\"chrome\").build();\nlet folderName = \"4\";\ntry {\n  if (!fs.existsSync(folderName)) {\n    fs.mkdirSync(folderName);\n  }\n  await driver.get(\n    \"https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub\"\n  );\n  await takeScreenshot(driver, folderName, \"1_login_page.png\"); // Captura de pantalla de la página de inicio de sesión de GitHub\n  await driver.wait(until.elementLocated(By.id(\"login_field\")), 5000); // Esperar hasta que se cargue el campo de nombre de usuario\n  await driver\n    .findElement(By.id(\"login_field\"))\n    .sendKeys(\"goumanpenguinNgrok01\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"2_username_entered.png\"); // Captura de pantalla después de introducir el nombre de usuario\n  await driver.wait(until.elementLocated(By.id(\"password\")), 5000); // Esperar hasta que se cargue el campo de contraseña\n  await driver\n    .findElement(By.id(\"password\"))\n    .sendKeys(\"Pantonio2404#\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"3_password_entered.png\"); // Captura de pantalla después de introducir la contraseña\n  console.log(\"Primera parte exitosa.\");\n  let avatarImage = await driver.wait(\n    until.elementLocated(By.css(\"img.avatar.circle\")),\n    5000\n  );\n  await avatarImage.click();\n  await takeScreenshot(driver, folderName, \"avatar_image_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    ),\n    5000\n  );\n  await driver\n    .findElement(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    )\n    .click();\n  await takeScreenshot(driver, folderName, \"your_repositories_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.xpath('//a[contains(text(), \"repo1\")]')),\n    10000\n  );\n  await driver\n    .findElement(By.xpath('//a[contains(text(), \"repo1\")]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"repo1_clicked.png\");\n  await driver.wait(until.elementLocated(By.id(\"settings-tab\")), 20000);\n  await driver.findElement(By.id(\"settings-tab\")).click();\n  await takeScreenshot(driver, folderName, \"settings_tab_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath('//span[contains(text(), \"Change visibility\")]')\n    ),\n    15000\n  );\n  await driver\n    .findElement(By.xpath('//span[contains(text(), \"Change visibility\")]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"change_visibility_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.className(\"ActionList-item-label\")),\n    15000\n  );\n  await driver.findElement(By.className(\"ActionList-item-label\")).click();\n  await takeScreenshot(driver, folderName, \"change_to_public_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-public\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-public\"))\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"want_to_make_public_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-public\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-public\"))\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"read_and_understand_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-visibility-proceed-button-public\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"repo-visibility-proceed-button-public\"))\n    .click();\n  await takeScreenshot(driver, folderName, \"make_public_clicked.png\");\n  console.log(\"Visibilidad Cambiada exitosamente.\");\n} catch (error) {\n  console.error(\"Error al crear el repositorio:\", error);\n  await takeScreenshot(driver, folderName, \"error_screenshot.png\");\n} finally {\n  await driver.quit();\n  generateReport();\n}",
+              "err": {},
+              "uuid": "c001be71-f44a-42f9-95ae-8c7386a34ff9",
+              "parentUUID": "2939ac75-9aad-470e-92bf-d2654389d442",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c001be71-f44a-42f9-95ae-8c7386a34ff9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7992,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 50000
+        },
+        {
+          "uuid": "600fcb64-7d36-49df-94be-fb5e60298630",
+          "title": "Eliminación de repositorio en GitHub",
+          "fullFile": "C:\\Users\\Pedro\\Documents\\Selenium\\DeleteRepository.js",
+          "file": "\\DeleteRepository.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "eliminar un repositorio con éxito",
+              "fullTitle": "Eliminación de repositorio en GitHub eliminar un repositorio con éxito",
+              "timedOut": false,
+              "duration": 7611,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(\"chrome\").build();\nlet folderName = \"5\";\ntry {\n  if (!fs.existsSync(folderName)) {\n    fs.mkdirSync(folderName);\n  }\n  await driver.get(\n    \"https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub\"\n  );\n  await takeScreenshot(driver, folderName, \"1_login_page.png\");\n  await driver.wait(until.elementLocated(By.id(\"login_field\")), 5000);\n  await driver\n    .findElement(By.id(\"login_field\"))\n    .sendKeys(\"goumanpenguinNgrok01\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"2_username_entered.png\");\n  await driver.wait(until.elementLocated(By.id(\"password\")), 5000);\n  await driver\n    .findElement(By.id(\"password\"))\n    .sendKeys(\"Pantonio2404#\", Key.RETURN);\n  await takeScreenshot(driver, folderName, \"3_password_entered.png\");\n  console.log(\"Primera parte exitosa.\");\n  let avatarImage = await driver.wait(\n    until.elementLocated(By.css(\"img.avatar.circle\")),\n    5000\n  );\n  await avatarImage.click();\n  await takeScreenshot(driver, folderName, \"avatar_image_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    ),\n    5000\n  );\n  await driver\n    .findElement(\n      By.xpath(\n        '//span[@class=\"ActionListItem-label\" and contains(text(), \"Your repositories\")]'\n      )\n    )\n    .click();\n  await takeScreenshot(driver, folderName, \"your_repositories_clicked.png\");\n  await driver.wait(\n    until.elementLocated(By.xpath('//a[contains(text(), \"repo1\")]')),\n    10000\n  );\n  await driver\n    .findElement(By.xpath('//a[contains(text(), \"repo1\")]'))\n    .click();\n  await takeScreenshot(driver, folderName, \"repo1_clicked.png\");\n  await driver.wait(until.elementLocated(By.id(\"settings-tab\")), 20000);\n  await driver.findElement(By.id(\"settings-tab\")).click();\n  await takeScreenshot(driver, folderName, \"security_tab_clicked.png\");\n  await driver.wait(\n    until.elementLocated(\n      By.xpath('//span[text()=\"Delete this repository\"]')\n    ),\n    15000\n  );\n  await driver\n    .findElement(By.xpath('//span[text()=\"Delete this repository\"]'))\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"delete_repository_button_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(\n      By.xpath('//span[text()=\"I want to delete this repository\"]')\n    ),\n    5000\n  );\n  await driver\n    .findElement(\n      By.xpath('//span[text()=\"I want to delete this repository\"]')\n    )\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"i_want_to_delete_repository_button_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(\n      By.xpath(\n        '//span[contains(text(), \"I have read and understand these effects\")]'\n      )\n    ),\n    5000\n  );\n  await driver\n    .findElement(\n      By.xpath(\n        '//span[contains(text(), \"I have read and understand these effects\")]'\n      )\n    )\n    .click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"read_and_understand_button_clicked.png\"\n  );\n  await driver.wait(\n    until.elementLocated(By.id(\"verification_field\")),\n    5000\n  );\n  await driver\n    .findElement(By.id(\"verification_field\"))\n    .sendKeys(\"goumanpenguinNgrok01/repo1\");\n  await takeScreenshot(driver, folderName, \"verification_field_filled.png\");\n  await driver.wait(\n    until.elementLocated(By.id(\"repo-delete-proceed-button\")),\n    5000\n  );\n  await driver.findElement(By.id(\"repo-delete-proceed-button\")).click();\n  await takeScreenshot(\n    driver,\n    folderName,\n    \"repo_delete_proceed_button_clicked.png\"\n  );\n  console.log(\"Repositorio eliminado exitosamente.\");\n} catch (error) {\n  console.error(\"Error al crear o eliminar el repositorio:\", error);\n  await takeScreenshot(driver, folderName, \"error_screenshot.png\");\n} finally {\n  await driver.quit();\n  generateReport();\n}",
+              "err": {},
+              "uuid": "f6600e2c-ccb1-4a29-ab0c-76f03a69edfd",
+              "parentUUID": "600fcb64-7d36-49df-94be-fb5e60298630",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f6600e2c-ccb1-4a29-ab0c-76f03a69edfd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7611,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 50000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 50000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.4.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "combined-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "combined-report"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
